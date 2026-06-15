@@ -21,6 +21,14 @@ export default function MoviesScreen() {
     setNewMovie("");
   };
 
+  const editMovie = (movieToEdit: string) => {
+    setNewMovie(movieToEdit);
+
+    setMovies(
+      movies.filter((movie) => movie !== movieToEdit)
+    );
+  };
+
   const markAsWatched = (movie: string) => {
     setWatchedMovies([...watchedMovies, movie]);
   };
@@ -54,15 +62,21 @@ export default function MoviesScreen() {
         <View key={movie} style={styles.movieContainer}>
           <Text style={styles.movie}>🎬 {movie} </Text>
 
+          <View style={styles.buttonContainer}>
+            <Pressable onPress={() => editMovie(movie)}>
+              <Text style={styles.editButton}>Edit</Text>
+            </Pressable>
+
           {watchedMovies.includes(movie) ? (
             <Pressable onPress={() => unwatchMovie(movie)}>
-              <Text style={styles.watchedText}>✅ Watched</Text>
+              <Text style={styles.watchedText}>Watched</Text>
             </Pressable>
           ) : (
             <Pressable onPress={() => markAsWatched(movie)}>
               <Text style={styles.watchButton}>Mark as watched</Text>
             </Pressable>
           )}
+          </View>
         </View>
       ))}
       <Footer />
@@ -121,11 +135,24 @@ const styles = StyleSheet.create({
     color: colors.text,
     marginBottom: 10,
   },
+  buttonContainer: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  editButton: {
+    color: colors.text,
+    borderWidth: 2,
+    borderColor: '#FFD369',
+
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 6,
+  },
   watchedText: {
     color: colors.text,
     borderWidth: 1.5,
     borderColor: '#6ec319',
-    fontSize: 16,
+    fontSize: 14,
     
     paddingHorizontal: 14,
     paddingVertical: 8,
@@ -136,7 +163,6 @@ const styles = StyleSheet.create({
     color: colors.text,
     borderWidth: 2,
     borderColor: '#199bc3',
-    fontSize: 16,
     
     paddingHorizontal: 14,
     paddingVertical: 8,
