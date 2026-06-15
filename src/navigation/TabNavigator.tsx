@@ -14,7 +14,11 @@ type TabNavigatorProps = {
 export default function TabNavigator({ watchedMovies, setWatchedMovies}: TabNavigatorProps) {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen> 
+      <Tab.Screen name="Home">
+        {() => (
+          <HomeScreen watchedMovies={watchedMovies}/>
+        )}
+      </Tab.Screen> 
 
       <Tab.Screen name="Movies">
         {() => (
