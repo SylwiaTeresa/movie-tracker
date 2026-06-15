@@ -37,6 +37,7 @@ export default function TabNavigator({ watchedMovies, setWatchedMovies, movies, 
         {() => (
           <WatchedScreen 
             watchedMovies={watchedMovies}
+            setWatchedMovies={setWatchedMovies}
           />
         )}
       </Tab.Screen> 
