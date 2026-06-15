@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../constans/theme";
 import Footer from "../components/Footer";
 import { useState } from "react";
@@ -14,9 +14,27 @@ export default function WatchedScreen({
   const [ratings, setRatings] = useState<{ [key: string]: number }>({});
 
   const removedMovie = (movieToRemove: string) => {
-    setWatchedMovies(
-      watchedMovies.filter((movie) => movie !== movieToRemove)
-    );
+   Alert.alert(
+    "Remove movie",
+    `Are you sure you want to remove the movie "${movieToRemove}"?`,
+    [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "Remove",
+        style: "destructive",
+        onPress: () => {
+          setWatchedMovies(
+            watchedMovies.filter(
+              (movie) => movie !== movieToRemove
+            )
+          );
+        },
+      },
+    ]
+   );
   };
 
   const rateMovie = (movie: string, rating: number) => {
