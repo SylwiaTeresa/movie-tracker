@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../constans/theme";
 import Footer from "../components/Footer";
+import { useState } from "react";
 
 type WatchedScreenProps = {
   watchedMovies: string[];
@@ -10,10 +11,19 @@ type WatchedScreenProps = {
 export default function WatchedScreen({
   watchedMovies,setWatchedMovies
 }: WatchedScreenProps) {
+  const [ratings, setRatings] = useState<{ [key: string]: number }>({});
+
   const removedMovie = (movieToRemove: string) => {
     setWatchedMovies(
       watchedMovies.filter((movie) => movie !== movieToRemove)
     );
+  };
+
+  const rateMovie = (movie: string, rating: number) => {
+    setRatings({
+      ...ratings,
+      [movie]: rating,
+    });
   };
 
   return (
@@ -23,10 +33,24 @@ export default function WatchedScreen({
       {watchedMovies.map((movie) => (
         <View key={movie}>
           <Text style={styles.movie}>🎞️ {movie}</Text>
+          <View style={styles.buttonRow}>
+            <View style={styles.starContainer}>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Pressable
+                  key={star}
+                  onPress={() => rateMovie(movie, star)}
+                >
+                  <Text style={styles.star}>
+                    {star <= (ratings[movie] || 0) ? "🔆" : "🔅"}
+                  </Text>
+                </Pressable>
+              ))}
 
-          <Pressable onPress={() => removedMovie(movie)}>
-            <Text style={styles.removeButton}>Remove</Text>
-          </Pressable>
+            </View>
+            <Pressable onPress={() => removedMovie(movie)}>
+              <Text style={styles.removeButton}>Remove</Text>
+            </Pressable>
+          </View>
         </View>
       ))}
 
@@ -52,7 +76,20 @@ const styles = StyleSheet.create({
    movie: {
     fontSize: 18,
     color: colors.text,
-    marginBottom: 10,
+    marginBottom: 4,
+  },
+  buttonRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  starContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  star: {
+    fontSize: 20,
   },
   removeButton: {
     color: colors.text,

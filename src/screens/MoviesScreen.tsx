@@ -22,8 +22,14 @@ export default function MoviesScreen({ movies, setMovies, watchedMovies, setWatc
 
   const markAsWatched = (movie: string) => {
     setWatchedMovies([...watchedMovies, movie]);
-    
-  }
+  };
+
+  const unwatchMovie = (movieToRemove: string) => {
+    setWatchedMovies(
+      watchedMovies.filter((movie) => movie !== movieToRemove)
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>⋆ Movies ⋆</Text>
@@ -48,7 +54,9 @@ export default function MoviesScreen({ movies, setMovies, watchedMovies, setWatc
           <Text style={styles.movie}>🎬 {movie} </Text>
 
           {watchedMovies.includes(movie) ? (
-            <Text style={styles.watchedText}>✅ Watched</Text>
+            <Pressable onPress={() => unwatchMovie(movie)}>
+              <Text style={styles.watchedText}>✅ Watched</Text>
+            </Pressable>
           ) : (
             <Pressable onPress={() => markAsWatched(movie)}>
               <Text style={styles.watchButton}>Mark as watched</Text>
