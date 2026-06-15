@@ -1,12 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
 import { colors } from "../constans/theme";
 import Footer from "../components/Footer";
+import { useContext } from "react";
+import { MovieContext } from "../context/MovieContext";
 
-type HomeScreenProps = {
-  watchedMovies: string[];
-};
+export default function HomeScreen() {
+  const context = useContext(MovieContext);
 
-export default function HomeScreen({ watchedMovies }: HomeScreenProps) {
+  if (!context) {
+    return null;
+  }
+
+  const {watchedMovies} = context;
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🎬 Movie Tracker 🎬</Text>

@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { colors } from "../constans/theme";
 import Footer from "../components/Footer";
+import { MovieContext } from "../context/MovieContext";
 
-type MoviesScreenProps = {
-  movies: string[];
-  setMovies: React.Dispatch<React.SetStateAction<string[]>>;
-  watchedMovies: string[];
-  setWatchedMovies: React.Dispatch<React.SetStateAction<string[]>>;
-};
-
-export default function MoviesScreen({ movies, setMovies, watchedMovies, setWatchedMovies}: MoviesScreenProps) {
+export default function MoviesScreen() {
   const [newMovie, setNewMovie] = useState("");
+  const context = useContext(MovieContext);
+
+  if (!context) {
+    return null;
+  }
+
+  const {movies, setMovies, watchedMovies, setWatchedMovies} = context;
 
   const addMovie = () => {
     if (!newMovie.trim()) return;

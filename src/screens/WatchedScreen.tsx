@@ -1,17 +1,18 @@
 import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../constans/theme";
 import Footer from "../components/Footer";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MovieContext } from "../context/MovieContext";
 
-type WatchedScreenProps = {
-  watchedMovies: string[];
-  setWatchedMovies: React.Dispatch<React.SetStateAction<string[]>>;
-};
-
-export default function WatchedScreen({
-  watchedMovies,setWatchedMovies
-}: WatchedScreenProps) {
+export default function WatchedScreen() {
   const [ratings, setRatings] = useState<{ [key: string]: number }>({});
+  const context = useContext(MovieContext);
+
+  if (!context) {
+    return null;
+  }
+
+  const {watchedMovies, setWatchedMovies} = context;
 
   const removedMovie = (movieToRemove: string) => {
    Alert.alert(
