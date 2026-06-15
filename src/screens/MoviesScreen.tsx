@@ -1,9 +1,13 @@
-import { useState } from "react";
+//import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+type MoviesScreenProps = {
+  watchedMovies: string[];
+  setWatchedMovies: React.Dispatch<React.SetStateAction<string[]>>;
+};
 
-export default function MoviesScreen() {
-  const [watchedMovies, setWatchedMovies] = useState<string[]>([]);
+export default function MoviesScreen({ watchedMovies, setWatchedMovies}: MoviesScreenProps) {
+  //const [watchedMovies, setWatchedMovies] = useState<string[]>([]);
 
   const movies = [
     "Interstellar",

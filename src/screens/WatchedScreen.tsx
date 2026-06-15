@@ -1,10 +1,19 @@
 import { Text, View } from "react-native";
 
-export default function WatchedScreen() {
+type WatchedScreenProps = {
+  watchedMovies: string[];
+};
+
+export default function WatchedScreen({
+  watchedMovies,
+}: WatchedScreenProps) {
   return (
     <View>
       <Text>Watched Movies</Text>
-      <Text>Interstellar ✅</Text>
+
+      {watchedMovies.map((movie) => (
+        <Text key={movie}>✅ {movie}</Text>
+      ))}
     </View>
-  )
+  );
 }

@@ -2,15 +2,36 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/HomeScreen";
 import MoviesScreen from "../screens/MoviesScreen";
 import WatchedScreen from "../screens/WatchedScreen";
+import React from "react";
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigator() {
+type TabNavigatorProps = {
+  watchedMovies: string[];
+  setWatchedMovies: React.Dispatch<React.SetStateAction<string[]>>;
+};
+
+export default function TabNavigator({ watchedMovies, setWatchedMovies}: TabNavigatorProps) {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen}/>
-      <Tab.Screen name="Movies" component={MoviesScreen}/>
-      <Tab.Screen name="Watched" component={WatchedScreen}/>
+      <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen> 
+
+      <Tab.Screen name="Movies">
+        {() => (
+          <MoviesScreen
+            watchedMovies={watchedMovies}
+            setWatchedMovies={setWatchedMovies}
+          />
+        )}
+      </Tab.Screen> 
+
+      <Tab.Screen name="Watched">
+        {() => (
+          <WatchedScreen 
+            watchedMovies={watchedMovies}
+          />
+        )}
+      </Tab.Screen> 
     </Tab.Navigator>
   )
 }
