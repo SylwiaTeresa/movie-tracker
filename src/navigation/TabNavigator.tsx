@@ -12,7 +12,7 @@ export default function TabNavigator() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          let iconName;
+          let iconName: "home" | "film" | "star";
 
           if (route.name === "Home") {
             iconName = "home";
@@ -24,7 +24,7 @@ export default function TabNavigator() {
 
           return (
             <Ionicons
-              name={iconName as any}
+              name={iconName}
               size={size}
               color={color}
             />
