@@ -29,6 +29,7 @@ export default function HomeScreen() {
         This app lets you add the movies you want to watch, 
         so that you don't forget them. Then click the button, 
         once you've actually seen the movie, to save your history.
+        The app even allows you to rate the movie you've seen.
         {'\n'}{'\n'}✨🎞️ Enjoy your movie time! 🎞️✨
       </Text>
 
@@ -55,11 +56,13 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 20,
     color: colors.text,
+    marginBottom: -10,
   },
   p: {
     fontSize: 16,
     color: colors.text,
     textAlign: "center",
+    marginTop: -10,
   },
   counter: {
     fontSize: 18,

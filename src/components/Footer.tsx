@@ -6,7 +6,7 @@ export default function Footer() {
     <View style={styles.footer}>
       <Text style={styles.footerText}>
         Built with React Native & Expo
-        {'\n'}ⓒ Sylwia P
+        {'\n'}ⓒ Sylwia Teresa
       </Text>
     </View>
   )
