@@ -9,9 +9,11 @@ const Tab = createBottomTabNavigator();
 type TabNavigatorProps = {
   watchedMovies: string[];
   setWatchedMovies: React.Dispatch<React.SetStateAction<string[]>>;
+  movies: string[];
+  setMovies: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
-export default function TabNavigator({ watchedMovies, setWatchedMovies}: TabNavigatorProps) {
+export default function TabNavigator({ watchedMovies, setWatchedMovies, movies, setMovies}: TabNavigatorProps) {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home">
@@ -25,6 +27,8 @@ export default function TabNavigator({ watchedMovies, setWatchedMovies}: TabNavi
           <MoviesScreen
             watchedMovies={watchedMovies}
             setWatchedMovies={setWatchedMovies}
+            movies={movies}
+            setMovies={setMovies}
           />
         )}
       </Tab.Screen> 
