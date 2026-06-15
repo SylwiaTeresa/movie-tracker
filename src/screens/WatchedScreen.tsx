@@ -3,6 +3,7 @@ import { colors } from "../constans/theme";
 import Footer from "../components/Footer";
 import { useContext, useState } from "react";
 import { MovieContext } from "../context/MovieContext";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function WatchedScreen() {
   const [ratings, setRatings] = useState<{ [key: string]: number }>({});
@@ -67,7 +68,11 @@ export default function WatchedScreen() {
 
             </View>
             <Pressable onPress={() => removedMovie(movie)}>
-              <Text style={styles.removeButton}>Remove</Text>
+              <MaterialIcons
+                name="delete"
+                size={26}
+                color="#c3192a"
+              />
             </Pressable>
           </View>
         </View>
@@ -109,17 +114,5 @@ const styles = StyleSheet.create({
   },
   star: {
     fontSize: 20,
-  },
-  removeButton: {
-    color: colors.text,
-    borderWidth: 2,
-    borderColor: '#c3192a',
-    fontSize: 14,
-  
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 6,
-    marginTop: 6,
-    marginBottom: 10,
   },
 });

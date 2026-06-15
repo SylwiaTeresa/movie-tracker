@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { colors } from "../constans/theme";
 import Footer from "../components/Footer";
 import { MovieContext } from "../context/MovieContext";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function MoviesScreen() {
   const [newMovie, setNewMovie] = useState("");
@@ -63,17 +64,32 @@ export default function MoviesScreen() {
           <Text style={styles.movie}>🎬 {movie} </Text>
 
           <View style={styles.buttonContainer}>
-            <Pressable onPress={() => editMovie(movie)}>
-              <Text style={styles.editButton}>Edit</Text>
+            <Pressable 
+              onPress={() => editMovie(movie)}
+              style={{ marginRight: 10 }}
+            >
+              <MaterialIcons
+                name="edit"
+                size={24}
+                color={colors.accent}
+              />
             </Pressable>
 
           {watchedMovies.includes(movie) ? (
             <Pressable onPress={() => unwatchMovie(movie)}>
-              <Text style={styles.watchedText}>Watched</Text>
+              <MaterialIcons
+                name="undo"
+                size={24}
+                color="#199bc3"
+              />
             </Pressable>
           ) : (
             <Pressable onPress={() => markAsWatched(movie)}>
-              <Text style={styles.watchButton}>Mark as watched</Text>
+              <MaterialIcons
+                name="check-circle"
+                size={24}
+                color="#6ec319"
+              />
             </Pressable>
           )}
           </View>
@@ -113,7 +129,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     color: colors.text,
-    borderWidth: 2,
+    borderWidth: 2.5,
     borderColor: '#c3a719',
     fontSize: 16,
   
@@ -138,35 +154,5 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     gap: 8,
-  },
-  editButton: {
-    color: colors.text,
-    borderWidth: 2,
-    borderColor: '#FFD369',
-
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 6,
-  },
-  watchedText: {
-    color: colors.text,
-    borderWidth: 1.5,
-    borderColor: '#6ec319',
-    fontSize: 14,
-    
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 6,
-    marginBottom: 10,
-  },
-  watchButton: {
-    color: colors.text,
-    borderWidth: 2,
-    borderColor: '#199bc3',
-    
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 6,
-    marginBottom: 10,
   },
 });
